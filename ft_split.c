@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:28:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/09/19 12:15:11 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/09/21 18:10:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**ft_split(char const *s, char c)
 	size = count_chars(s, c);
 	if (!s)
 		return (NULL);
-	result = (char **)malloc(sizeof(char *) * (size + 1));
+	result = (char **)ft_calloc(size + 1, sizeof(char *));
 	if (!result)
 		return (NULL);
 	ft_split_words(result, s, c);

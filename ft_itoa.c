@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:19:31 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/09/21 17:15:12 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:28:40 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,30 @@ int	digit_count(int n)
 	return (count);
 }
 
+char	*check(long int nb, char *str, int i)
+{
+	if (nb == 0)
+		str = ft_calloc(2, sizeof(char));
+	else
+		str = ft_calloc(i + 1, sizeof(char));
+	return (str);
+}
+
 char	*ft_itoa(int n)
 {
-	char		*str;
+	char		*str;	
 	int			i;
 	long int	nb;
 
+	str = NULL;
 	nb = n;
 	i = digit_count(nb);
-	if (nb == 0)
-	{
-		str = ft_calloc(2, sizeof(char));
-		str[0] = 48;
-	}
-	else
-		str = ft_calloc(i + 1, sizeof(char));
+	str = check(nb, str, i);
+	if (!str)
+		return (NULL);
 	str[i--] = 0;
+	if (nb == 0)
+		str[0] = '0';
 	if (nb < 0)
 	{
 		str[0] = '-';
