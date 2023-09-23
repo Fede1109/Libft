@@ -10,36 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_space(char c)
-{
-	return (c == 32 || (9 <= c && c <= 13));
-}
+#include <limits.h>
 
 int	ft_atoi(char *str)
 {
-	int	result;
-	int	sign;
-	int	i;
+	unsigned long	result;
+	int				sign;
 
-	sign = 0;
+	sign = 1;
 	result = 0;
-	i = 0;
-	while (ft_is_space(str[i]))
-		i++;
-	if (str[i] == '-')
+	while ((*str == ' ' || ('\t' <= *str && *str <= '\r')))
+		str++;
+	if (*str == '-')
 	{
-		sign++;
-		i++;
+		sign = -sign;
+		str++;
 	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	else if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		result = result * 10 + (str[i] - '0');
-		i++;
+		result = result * 10 + (*str - '0');
+		if (result > LONG_MAX && sign > 0)
+			return (-1);
+		if (result > LONG_MAX && sign < 0)
+			return (0);
+		str++;
 	}
-	if (sign != 0)
-		return (-result);
-	else
-		return (result);
+	return (result * sign);
 }
