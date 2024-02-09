@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42madrid>       +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:28:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/09/21 18:10:55 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:50:06 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	z = 0;
+	if (!s)
+		return (NULL);
 	str = ft_calloc(sizeof(char *), (ft_count_words(s, c) + 1));
 	while (s[i] && str != NULL)
 	{
 		if (s[i] != c && (i == 0 || s[i - 1] == c))
 		{
 			str[z] = ft_extract_word(s, c, &i);
-			if (str[z] == NULL)
-			{
-				ft_free_split(str, ft_count_words(s, c));
-				return (NULL);
-			}
+			if (!str[z])
+				return (ft_free_split(str, ft_count_words(s, c)), NULL);
 			z++;
 		}
 		else
